@@ -1,0 +1,22 @@
+FROM debian:buster-slim
+ENV DEBIAN_FRONTEND noninteractive
+RUN echo "deb http://deb.debian.org/debian buster main\ndeb-src http://deb.debian.org/debian buster main\ndeb http://security.debian.org/debian-security buster/updates main\ndeb-src http://security.debian.org/debian-security buster/updates main\ndeb http://deb.debian.org/debian buster-updates main\ndeb-src http://deb.debian.org/debian buster-updates main" > /etc/apt/sources.list
+
+RUN apt-get update && apt-get dist-upgrade --yes && \
+apt-get install -y \
+build-essential \
+git \
+libexpat1-dev \
+libssl-dev \
+zlib1g-dev \
+libncurses5-dev \
+libbz2-dev \
+liblzma-dev \
+libsqlite3-dev \
+libffi-dev \
+tcl-dev \
+linux-headers-amd64 \
+libgdbm-dev \
+libreadline-dev \
+tk \
+tk-dev
