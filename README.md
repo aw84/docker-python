@@ -22,7 +22,7 @@ Notes:
 
 Example:
 ```
-docker run --name PyBuild -v c:\dev\docker_volume:/data -t pydev:0.0.1 /data/build_python.sh
+docker run --rm --name PyBuild -v c:\dev\docker_volume:/data -t pydev:0.0.1 /data/build_python.sh
 ```
 
 

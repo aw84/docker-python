@@ -1,0 +1,15 @@
+FROM pydev:0.0.1
+
+ADD Python-src /tmp/python-src
+
+RUN cd /tmp/python-src \
+&& ./configure \
+--enable-optimizations \
+--with-ensurepip=install \
+&& make -j4 \
+&& make -j4 install \
+&& cd / \
+&& rm -rf /tmp/python-src \
+&& apt-get clean \
+&& apt-get autoclean \
+&& update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 2
