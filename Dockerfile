@@ -1,12 +1,14 @@
 FROM debian:buster-slim
 
-ENV DEBIAN_FRONTEND noninteractive
+ARG PYTHONVERSION=3.9
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN echo "deb http://deb.debian.org/debian buster main\ndeb-src http://deb.debian.org/debian buster main\ndeb http://security.debian.org/debian-security buster/updates main\ndeb-src http://security.debian.org/debian-security buster/updates main\ndeb http://deb.debian.org/debian buster-updates main\ndeb-src http://deb.debian.org/debian buster-updates main" > /etc/apt/sources.list \
 && apt-get update \
 && apt-get dist-upgrade --yes \
-&& apt-get install -y build-essential \
-&& apt-get build-dep -y python3-{openssl} \
+&& apt-get install -y \
+build-essential \
 git \
 libexpat1-dev \
 libssl-dev \
@@ -46,4 +48,6 @@ RUN cd /tmp/python-src \
 && rm -rf /tmp/python-src \
 && apt-get clean \
 && apt-get autoclean \
-&& update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 2
+&& update-alternatives --install /usr/bin/python python /usr/local/bin/python${PYTHONVERSION} 2 \
+&& update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip3.9 2 \
+&& python${PYTHONVERSION} -m pip install --upgrade pip
